@@ -72,52 +72,54 @@ export default async function Home() {
           </div>
 
           {/* Additional Info */}
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">
-              ℹ️ How to Use
-            </h2>
-            <ul className="space-y-3 text-gray-600">
-              <li className="flex items-start">
-                <span className="font-bold mr-2">1.</span>
-                <span>Click on your grade level from the cards above</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">2.</span>
-                <span>Browse available reviewers by subject</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">3.</span>
-                <span>Click on a reviewer to view or download it</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">4.</span>
-                <span>Use the search and filter features to find specific topics</span>
-              </li>
-            </ul>
-          </div>
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">
-              ℹ️ How can I upload my reviewer?
-            </h2>
-            <ul className="space-y-3 text-gray-600">
-              <li className="flex items-start">
-                <span className="font-bold mr-2">1.</span>
-                <span>Prepare your reviewer into a Word or PDF document.</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">2.</span>
-                <span>Message one of our admins or join this discord server and follow instructions there.</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">3.</span>
-                <span>Wait for our admins to upload it to the website.</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">4.</span>
-                <span>Thats it your done!</span>
-              </li>
-              <p className="text-gray-600">If you want to report a reviewer for any reason, please contact our admins.</p>
-            </ul>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                ℹ️ How to Use
+              </h2>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">1.</span>
+                  <span>Click on your grade level from the cards above</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">2.</span>
+                  <span>Browse available reviewers by subject</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">3.</span>
+                  <span>Click on a reviewer to view or download it</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">4.</span>
+                  <span>Use the search and filter features to find specific topics</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                ℹ️ How can I upload my reviewer?
+              </h2>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">1.</span>
+                  <span>Prepare your reviewer into a Word or PDF document.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">2.</span>
+                  <span>Message one of our admins or join this discord server and follow instructions there.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">3.</span>
+                  <span>Wait for our admins to upload it to the website.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">4.</span>
+                  <span>Thats it your done!</span>
+                </li>
+                <p className="text-gray-600">If you want to report a reviewer for any reason, please contact our admins.</p>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
