@@ -25,7 +25,7 @@ export default async function Home() {
               Reviewer Library
             </h1>
             <p className="text-xl text-gray-600 mb-2 animate-fadeIn" style={{ animationDelay: '0.2s', opacity: 0 }}>
-              Access quality study materials for your grade level
+              Access reviewers made by you the students!
             </p>
             <p className="text-sm text-gray-500 animate-fadeIn" style={{ animationDelay: '0.3s', opacity: 0 }}>
               This project was inspired from Reviewers Kitchen!
@@ -64,13 +64,10 @@ export default async function Home() {
               📚 About the Library
             </h2>
             <p className="text-gray-600 mb-4">
-              Welcome to the Reviewer Library! This platform provides free access to study materials 
-              for students in grades 7-10. Browse through various subjects and download reviewers to 
-              help you prepare for your exams.
+              Welcome to the Reviewer Library! This website is a collection of reviewers made by students so that all students can use YOUR reviewer!
             </p>
             <p className="text-gray-600">
-              All reviewers are uploaded by administrators to ensure quality and accuracy. 
-              Each reviewer is organized by grade level and subject for easy navigation.
+              Reviewers that are uploaded here are accessble to all students! And of course we will credit the author of the reviewer as well as the person who submitted it.
             </p>
           </div>
 
@@ -98,16 +95,29 @@ export default async function Home() {
               </li>
             </ul>
           </div>
-
-          {/* Admin Note */}
-          <div className="text-center text-sm text-gray-500">
-            <p>
-              Are you an administrator?{" "}
-              <Link href="/login" className="text-purple-600 hover:text-purple-800 font-semibold">
-                Login here
-              </Link>
-              {" "}to upload new reviewers.
-            </p>
+          <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">
+              ℹ️ How can I upload my reviewer?
+            </h2>
+            <ul className="space-y-3 text-gray-600">
+              <li className="flex items-start">
+                <span className="font-bold mr-2">1.</span>
+                <span>Prepare your reviewer into a Word or PDF document.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-bold mr-2">2.</span>
+                <span>Message one of our admins or join this discord server and follow instructions there.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-bold mr-2">3.</span>
+                <span>Wait for our admins to upload it to the website.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-bold mr-2">4.</span>
+                <span>Thats it your done!</span>
+              </li>
+              <p className="text-gray-600">If you want to report a reviewer for any reason, please contact our admins.</p>
+            </ul>
           </div>
         </div>
       </div>
