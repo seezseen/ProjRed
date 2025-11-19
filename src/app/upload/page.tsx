@@ -69,7 +69,10 @@ export default function UploadPage() {
       <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
         <Header />
         <div className="flex items-center justify-center p-4 md:p-8 h-96">
-          <Loader2 className="h-8 w-8 animate-spin" />
+          <div className="flex flex-col items-center gap-4 animate-fadeIn">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-sm text-muted-foreground">Loading...</p>
+          </div>
         </div>
       </main>
     );

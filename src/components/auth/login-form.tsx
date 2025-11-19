@@ -51,30 +51,42 @@ export function LoginForm() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <Card className="w-full max-w-sm animate-scaleIn shadow-2xl border-2 hover:shadow-3xl transition-shadow duration-300">
+        <CardHeader className="space-y-2">
+          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            Login
+          </CardTitle>
+          <CardDescription className="animate-fadeIn" style={{ animationDelay: '0.1s' }}>
             Enter your credentials to access your account.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="space-y-2">
+            <div className="space-y-2 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
               <Label htmlFor="emailOrUsername">Email or Username</Label>
               <Input
                 id="emailOrUsername"
                 type="text"
                 placeholder="admin or admin@example.com"
+                className="transition-all duration-300 focus:scale-[1.02] focus:shadow-md"
                 {...form.register("emailOrUsername")}
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" {...form.register("password")} />
+              <Input 
+                id="password" 
+                type="password" 
+                className="transition-all duration-300 focus:scale-[1.02] focus:shadow-md"
+                {...form.register("password")} 
+              />
             </div>
-            <Button type="submit" className="w-full">
+            <Button 
+              type="submit" 
+              className="w-full animate-fadeIn transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95" 
+              style={{ animationDelay: '0.4s' }}
+            >
               Login
             </Button>
           </form>

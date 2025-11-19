@@ -20,23 +20,23 @@ export function Header() {
   const isAdmin = userRole === "admin" || userRole === "founder";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-fadeIn">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-8">
-          <Link href="/" className="text-2xl font-bold hover:opacity-80 transition-opacity">
+          <Link href="/" className="text-2xl font-bold hover:opacity-80 transition-all duration-300 hover:scale-105">
             Project Red
           </Link>
           <nav className="hidden md:flex items-center gap-4">
-            <Link href="/grade/7" className="text-sm hover:text-primary transition-colors">
+            <Link href="/grade/7" className="text-sm hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
               Grade 7
             </Link>
-            <Link href="/grade/8" className="text-sm hover:text-primary transition-colors">
+            <Link href="/grade/8" className="text-sm hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
               Grade 8
             </Link>
-            <Link href="/grade/9" className="text-sm hover:text-primary transition-colors">
+            <Link href="/grade/9" className="text-sm hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
               Grade 9
             </Link>
-            <Link href="/grade/10" className="text-sm hover:text-primary transition-colors">
+            <Link href="/grade/10" className="text-sm hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
               Grade 10
             </Link>
           </nav>
@@ -46,19 +46,19 @@ export function Header() {
           {session ? (
             <>
               {isAdmin && (
-                <Button asChild size="sm" variant="default">
+                <Button asChild size="sm" variant="default" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <Link href="/upload">
-                    <Upload className="mr-2 h-4 w-4" />
+                    <Upload className="mr-2 h-4 w-4 transition-transform duration-300 hover:rotate-12" />
                     Upload
                   </Link>
                 </Button>
               )}
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                  <Avatar>
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg">
+                  <Avatar className="transition-all duration-300">
                     <AvatarImage src={session.user?.image || ""} />
-                    <AvatarFallback>
+                    <AvatarFallback className="bg-gradient-to-br from-purple-500 to-blue-500 text-white">
                       {session.user?.name?.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
@@ -75,13 +75,13 @@ export function Header() {
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/profile">
+                  <Link href="/profile" className="transition-all duration-200 hover:translate-x-1">
                     <User className="mr-2 h-4 w-4" />
                     Profile
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/profile/settings">
+                  <Link href="/profile/settings" className="transition-all duration-200 hover:translate-x-1">
                     <Settings className="mr-2 h-4 w-4" />
                     Settings
                   </Link>

@@ -21,30 +21,31 @@ export default async function Home() {
         <div className="flex flex-col gap-8">
           {/* Hero Section */}
           <div className="text-center py-12">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-slideInUp">
               Reviewer Library
             </h1>
-            <p className="text-xl text-gray-600 mb-2">
+            <p className="text-xl text-gray-600 mb-2 animate-fadeIn" style={{ animationDelay: '0.2s', opacity: 0 }}>
               Access quality study materials for your grade level
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 animate-fadeIn" style={{ animationDelay: '0.3s', opacity: 0 }}>
               This project was inspired from Reviewers Kitchen!
             </p>
           </div>
 
           {/* Grade Level Cards */}
           <div className="max-w-5xl mx-auto w-full">
-            <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+            <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 animate-fadeIn" style={{ animationDelay: '0.4s', opacity: 0 }}>
               Select Your Grade Level
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {grades.map((grade) => (
+              {grades.map((grade, index) => (
                 <Link
                   key={grade.number}
                   href={`/grade/${grade.number}`}
-                  className="group"
+                  className="group animate-scaleIn"
+                  style={{ animationDelay: `${0.5 + index * 0.1}s`, opacity: 0 }}
                 >
-                  <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${grade.color} p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl`}>
+                  <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${grade.color} p-8 shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:-translate-y-2 hover:rotate-1`}>
                     <div className="text-center text-white">
                       <div className="text-6xl mb-3">{grade.emoji}</div>
                       <h3 className="text-3xl font-bold mb-2">Grade {grade.number}</h3>
