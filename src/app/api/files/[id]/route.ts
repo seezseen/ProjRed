@@ -35,11 +35,14 @@ export async function GET(
       
       downloadStream.on("end", () => {
         const buffer = Buffer.concat(chunks)
+        // Sanitize filename to only include ASCII characters
+        const sanitizedFilename = file.filename.replace(/[^\x00-\x7F]/g, "_")
+        
         const response = new NextResponse(buffer, {
           status: 200,
           headers: {
             "Content-Type": file.metadata?.contentType || "application/pdf",
-            "Content-Disposition": `inline; filename="${file.filename}"`,
+            "Content-Disposition": `inline; filename="${sanitizedFilename}"`,
             "Content-Length": buffer.length.toString(),
             "Cache-Control": "public, max-age=31536000, immutable",
           },
