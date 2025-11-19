@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import { Upload, User, LogOut, FileText, Shield, Settings, Award, PhoneCall, Megaphone } from "lucide-react";
+import { Upload, User, LogOut, FileText, Shield, Settings, Award, PhoneCall, Megaphone, MoreVertical } from "lucide-react";
 
 export function Header() {
   const { data: session } = useSession();
@@ -126,11 +126,40 @@ export function Header() {
             </DropdownMenu>
             </>
           ) : (
-            <Button asChild size="sm" variant="default">
-              <Link href="/login">
-                🔐 Admin Login
-              </Link>
-            </Button>
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="transition-all duration-300 hover:scale-110">
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem asChild>
+                    <Link href="/settings" className="transition-all duration-200 hover:translate-x-1">
+                      <Settings className="mr-2 h-4 w-4" />
+                      Settings
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/credits" className="transition-all duration-200 hover:translate-x-1">
+                      <Award className="mr-2 h-4 w-4" />
+                      Credits
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="https://discord.gg/2rPCnZwcbM" className="transition-all duration-200 hover:translate-x-1">
+                      <PhoneCall className="mr-2 h-4 w-4" />
+                      Contact Us
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Button asChild size="sm" variant="default">
+                <Link href="/login">
+                  🔐 Admin Login
+                </Link>
+              </Button>
+            </>
           )}
         </div>
       </div>
