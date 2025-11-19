@@ -15,7 +15,7 @@ export default async function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
+    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Header />
       <div className="container mx-auto p-4 md:p-8">
         <div className="flex flex-col gap-8">
@@ -24,17 +24,17 @@ export default async function Home() {
             <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-slideInUp">
               Reviewer Library
             </h1>
-            <p className="text-xl text-gray-600 mb-2 animate-fadeIn" style={{ animationDelay: '0.2s', opacity: 0 }}>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-2 animate-fadeIn" style={{ animationDelay: '0.2s', opacity: 0 }}>
               Access reviewers made by you the students!
             </p>
-            <p className="text-sm text-gray-500 animate-fadeIn" style={{ animationDelay: '0.3s', opacity: 0 }}>
+            <p className="text-sm text-gray-500 dark:text-gray-400 animate-fadeIn" style={{ animationDelay: '0.3s', opacity: 0 }}>
               This project was inspired from Reviewers Kitchen!
             </p>
           </div>
 
           {/* Grade Level Cards */}
           <div className="max-w-5xl mx-auto w-full">
-            <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 animate-fadeIn" style={{ animationDelay: '0.4s', opacity: 0 }}>
+            <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-gray-100 animate-fadeIn" style={{ animationDelay: '0.4s', opacity: 0 }}>
               Select Your Grade Level
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -59,25 +59,25 @@ export default async function Home() {
           </div>
 
           {/* Information Section */}
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">
+          <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
               📚 About the Library
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
               Welcome to the Reviewer Library! This website is a collection of reviewers made by students so that all students can use YOUR reviewer!
             </p>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Reviewers that are uploaded here are accessble to all students! And of course we will credit the author of the reviewer as well as the person who submitted it.
             </p>
           </div>
 
           {/* Additional Info */}
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
                 ℹ️ How to Use
               </h2>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
                   <span className="font-bold mr-2">1.</span>
                   <span>Click on your grade level from the cards above</span>
@@ -96,11 +96,11 @@ export default async function Home() {
                 </li>
               </ul>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
                 ℹ️ How can I upload my reviewer?
               </h2>
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
                   <span className="font-bold mr-2">1.</span>
                   <span>Prepare your reviewer into a Word or PDF document.</span>
@@ -117,7 +117,7 @@ export default async function Home() {
                   <span className="font-bold mr-2">4.</span>
                   <span>Thats it your done!</span>
                 </li>
-                <p className="text-gray-600">If you want to report a reviewer for any reason, please contact our admins.</p>
+                <p className="text-gray-600 dark:text-gray-300">If you want to report a reviewer for any reason, please contact our admins.</p>
               </ul>
             </div>
           </div>
