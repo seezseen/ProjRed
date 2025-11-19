@@ -6,8 +6,9 @@ export const runtime = 'nodejs'
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth
-  const isAdmin = req.auth?.user?.role === 'admin' || req.auth?.user?.role === 'founder'
-  const isFounder = req.auth?.user?.role === 'founder'
+  const userRole = (req.auth?.user as any)?.role
+  const isAdmin = userRole === 'admin' || userRole === 'founder'
+  const isFounder = userRole === 'founder'
   
   // Protected admin routes
   if (req.nextUrl.pathname.startsWith('/upload') || req.nextUrl.pathname.startsWith('/admin')) {
