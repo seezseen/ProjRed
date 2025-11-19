@@ -45,39 +45,13 @@ export function Header() {
           <ModeToggle />
           {session ? (
             <>
-              <Button asChild size="sm" variant="outline" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <Link href="/settings">
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span className="hidden sm:inline">Settings</span>
-                </Link>
-              </Button>
-              <Button asChild size="sm" variant="outline" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <Link href="/credits">
-                  <Award className="mr-2 h-4 w-4" />
-                  <span className="hidden sm:inline">Credits</span>
-                </Link>
-              </Button>
-              <Button asChild size="sm" variant="default" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <Link href="https://discord.gg/2rPCnZwcbM">
-                  <PhoneCall className="mr-2 h-4 w-4" />
-                  <span className="hidden sm:inline">Contact Us</span>
-                </Link>
-              </Button>
               {isAdmin && (
-                <>
-                  <Button asChild size="sm" variant="outline" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <Link href="/admin/broadcasts">
-                      <Megaphone className="mr-2 h-4 w-4" />
-                      <span className="hidden sm:inline">Broadcasts</span>
-                    </Link>
-                  </Button>
-                  <Button asChild size="sm" variant="default" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    <Link href="/upload">
-                      <Upload className="mr-2 h-4 w-4 transition-transform duration-300 hover:rotate-12" />
-                      <span className="hidden sm:inline">Upload</span>
-                    </Link>
-                  </Button>
-                </>
+                <Button asChild size="sm" variant="default" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <Link href="/upload">
+                    <Upload className="mr-2 h-4 w-4" />
+                    <span className="hidden lg:inline">Upload</span>
+                  </Link>
+                </Button>
               )}
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -90,7 +64,7 @@ export function Header() {
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="w-56">
                 <div className="flex items-center justify-start gap-2 p-2">
                   <div className="flex flex-col space-y-1 leading-none">
                     <p className="font-medium text-sm">{session.user?.name}</p>
@@ -101,29 +75,41 @@ export function Header() {
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/profile" className="transition-all duration-200 hover:translate-x-1">
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
+                  <Link href="/settings" className="transition-all duration-200 hover:translate-x-1">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Settings
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/profile/settings" className="transition-all duration-200 hover:translate-x-1">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Settings
+                  <Link href="/credits" className="transition-all duration-200 hover:translate-x-1">
+                    <Award className="mr-2 h-4 w-4" />
+                    Credits
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="https://discord.gg/2rPCnZwcbM" className="transition-all duration-200 hover:translate-x-1">
+                    <PhoneCall className="mr-2 h-4 w-4" />
+                    Contact Us
                   </Link>
                 </DropdownMenuItem>
                 {isAdmin && (
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                      <Link href="/admin/reviewers">
+                      <Link href="/admin/broadcasts" className="transition-all duration-200 hover:translate-x-1">
+                        <Megaphone className="mr-2 h-4 w-4" />
+                        Broadcasts
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin/reviewers" className="transition-all duration-200 hover:translate-x-1">
                         <FileText className="mr-2 h-4 w-4" />
                         Manage Reviewers
                       </Link>
                     </DropdownMenuItem>
                     {userRole === "founder" && (
                       <DropdownMenuItem asChild>
-                        <Link href="/admin/users">
+                        <Link href="/admin/users" className="transition-all duration-200 hover:translate-x-1">
                           <Shield className="mr-2 h-4 w-4" />
                           Manage Admins
                         </Link>
