@@ -32,6 +32,8 @@ const formSchema = z.object({
   description: z.string().min(10, "Description must be at least 10 characters"),
   subject: z.string().min(2, "Subject must be at least 2 characters"),
   gradeLevel: z.string().min(1, "Please select at least one grade level"),
+  tags: z.string().optional(),
+  difficulty: z.enum(["easy", "medium", "hard"]).optional(),
   file: z
     .instanceof(File)
     .refine((file) => file.size <= MAX_FILE_SIZE, "Max file size is 10MB")
@@ -88,6 +90,8 @@ export default function UploadPage() {
       formData.append("description", values.description);
       formData.append("subject", values.subject);
       formData.append("gradeLevel", values.gradeLevel);
+      if (values.tags) formData.append("tags", values.tags);
+      if (values.difficulty) formData.append("difficulty", values.difficulty);
 
       // Upload file and metadata to MongoDB
       const uploadResponse = await fetch("/api/reviewers/upload", {
@@ -175,6 +179,28 @@ export default function UploadPage() {
                     {form.formState.errors.subject.message}
                   </p>
                 )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="tags">Tags (comma separated)</Label>
+                <Input
+                  id="tags"
+                  type="text"
+                  placeholder="e.g., algebra, quadratic, exam"
+                  {...form.register("tags")}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="difficulty">Difficulty</Label>
+                <select
+                  id="difficulty"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  {...form.register("difficulty")}
+                >
+                  <option value="">Select difficulty</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium">Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="gradeLevel">Grade Level *</Label>

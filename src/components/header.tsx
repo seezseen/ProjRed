@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import { Upload, User, LogOut, FileText, Shield, Settings, Award, PhoneCall, Megaphone, MoreVertical } from "lucide-react";
+import { Upload, User, LogOut, FileText, Shield, Settings, Award, PhoneCall, Megaphone, MoreVertical, Search } from "lucide-react";
 
 export function Header() {
   const { data: session } = useSession();
@@ -20,9 +20,9 @@ export function Header() {
   const isAdmin = userRole === "admin" || userRole === "founder";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-fadeIn">
-      <div className="container flex h-16 items-center justify-between px-4">
-        <div className="flex items-center gap-8">
+    <header className="app-header sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-fadeIn glass-surface gradient-sheen">
+      <div className="flex h-16 items-center justify-between w-full px-4 lg:px-6">
+        <div className="flex items-center gap-8 flex-1 min-w-0">
           <Link href="/" className="text-2xl font-bold hover:opacity-80 transition-all duration-300 hover:scale-105">
             Reviewer's Menu
           </Link>
@@ -42,6 +42,11 @@ export function Header() {
           </nav>
         </div>
         <div className="flex items-center gap-2">
+          <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+            <Link href="/search" aria-label="Search">
+              <Search className="h-4 w-4" />
+            </Link>
+          </Button>
           <ModeToggle />
           {session ? (
             <>
@@ -81,6 +86,12 @@ export function Header() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
+                  <Link href="/profile" className="transition-all duration-200 hover:translate-x-1">
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link href="/credits" className="transition-all duration-200 hover:translate-x-1">
                     <Award className="mr-2 h-4 w-4" />
                     Credits
@@ -107,6 +118,13 @@ export function Header() {
                         Manage Reviewers
                       </Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin/pointers" className="transition-all duration-200 hover:translate-x-1">
+                        <FileText className="mr-2 h-4 w-4" />
+                        Pointers Management
+                      </Link>
+                    </DropdownMenuItem>
+                    
                     {userRole === "founder" && (
                       <DropdownMenuItem asChild>
                         <Link href="/admin/users" className="transition-all duration-200 hover:translate-x-1">
@@ -129,7 +147,7 @@ export function Header() {
             <>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="transition-all duration-300 hover:scale-110">
+                  <Button variant="ghost" size="sm" className="transition-all duration-300 hover:scale-110" aria-label="Open menu" title="Open menu">
                     <MoreVertical className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>

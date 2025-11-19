@@ -4,14 +4,13 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ReviewerCard } from "@/components/reviewer-card"
 import type { Reviewer } from "@/app/types"
-import { use } from "react"
 
 interface GradePageProps {
-  params: Promise<{ grade: string }>
+  params: { grade: string }
 }
 
 export default function GradePage({ params }: GradePageProps) {
-  const { grade } = use(params)
+  const { grade } = params
   const [reviewers, setReviewers] = useState<Reviewer[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
@@ -85,7 +84,7 @@ export default function GradePage({ params }: GradePageProps) {
         </div>
 
         {/* Search and Filter */}
-        <div className="mb-8 flex flex-col sm:flex-row gap-4 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+        <div className="mb-8 flex flex-col sm:flex-row gap-4 animate-fadeIn glass-panel p-4 rounded-xl" style={{ animationDelay: '0.3s' }}>
           <input
             type="text"
             placeholder="Search reviewers..."

@@ -38,11 +38,26 @@ export async function GET(
         // Sanitize filename to only include ASCII characters
         const sanitizedFilename = file.filename.replace(/[^\x00-\x7F]/g, "_")
         
+        const forceDownload = request.nextUrl.searchParams.get("download") === "1";
+        const dispositionType = forceDownload ? "attachment" : "inline";
+
+        // Increment download count only for explicit downloads
+        if (forceDownload) {
+          try {
+            db.collection("reviewers").updateOne(
+              { fileKey: id },
+              { $inc: { downloadCount: 1 }, $set: { lastDownloadedAt: new Date() } }
+            ).catch(() => {})
+          } catch (_) {
+            // Non-blocking: ignore metrics errors
+          }
+        }
+
         const response = new NextResponse(buffer, {
           status: 200,
           headers: {
             "Content-Type": file.metadata?.contentType || "application/pdf",
-            "Content-Disposition": `inline; filename="${sanitizedFilename}"`,
+            "Content-Disposition": `${dispositionType}; filename="${sanitizedFilename}"`,
             "Content-Length": buffer.length.toString(),
             "Cache-Control": "public, max-age=31536000, immutable",
           },

@@ -29,6 +29,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <BroadcastManager />
+            <div className="ambient-bg" aria-hidden="true" />
             {children}
             <Toaster />
           </ThemeProvider>

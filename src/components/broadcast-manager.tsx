@@ -8,8 +8,14 @@ import { BroadcastPopup } from "./broadcast-popup";
 export function BroadcastManager() {
   const [broadcasts, setBroadcasts] = useState<Broadcast[]>([]);
   const [dismissedIds, setDismissedIds] = useState<string[]>([]);
+  const [mutePopups, setMutePopups] = useState(false);
+  const [hideBanner, setHideBanner] = useState(false);
 
   useEffect(() => {
+    // Load user display preferences
+    setMutePopups(localStorage.getItem("settings.mutePopups") === "true");
+    setHideBanner(localStorage.getItem("settings.hideBanner") === "true");
+
     // Load dismissed broadcasts from localStorage
     const stored = localStorage.getItem("dismissedBroadcasts");
     if (stored) {
@@ -46,8 +52,8 @@ export function BroadcastManager() {
 
   // Filter out dismissed broadcasts and separate by type
   const activeBroadcasts = broadcasts.filter((b) => !dismissedIds.includes(b._id));
-  const urgentBroadcast = activeBroadcasts.find((b) => b.type === "urgent");
-  const bannerBroadcasts = activeBroadcasts.filter((b) => b.type !== "urgent");
+  const urgentBroadcast = mutePopups ? undefined : activeBroadcasts.find((b) => b.type === "urgent");
+  const bannerBroadcasts = hideBanner ? [] : activeBroadcasts.filter((b) => b.type !== "urgent");
 
   return (
     <>

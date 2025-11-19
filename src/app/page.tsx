@@ -15,7 +15,7 @@ export default async function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 gradient-animated">
       <Header />
       <div className="container mx-auto p-4 md:p-8">
         <div className="flex flex-col gap-8">
@@ -45,7 +45,7 @@ export default async function Home() {
                   className="group animate-scaleIn"
                   style={{ animationDelay: `${0.5 + index * 0.1}s`, opacity: 0 }}
                 >
-                  <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${grade.color} p-8 shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:-translate-y-2 hover:rotate-1`}>
+                  <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${grade.color} p-8 shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:-translate-y-2 hover:rotate-1 gradient-sheen`}>
                     <div className="text-center text-white">
                       <div className="text-6xl mb-3">{grade.emoji}</div>
                       <h3 className="text-3xl font-bold mb-2">Grade {grade.number}</h3>
@@ -55,11 +55,29 @@ export default async function Home() {
                   </div>
                 </Link>
               ))}
+
             </div>
+
+            
+          </div>
+
+          {/* Pointers Card */}
+          <div className="max-w-5xl mx-auto w-full">
+            <Link href="/pointers" className="block group">
+              <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 border p-6 shadow-lg transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl glass-panel">
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 text-white flex items-center justify-center text-2xl">📌</div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">Pointers</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Pointers given my your teachers!.</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
 
           {/* Information Section */}
-          <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+          <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg glass-panel">
             <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
               📚 About the Library
             </h2>
@@ -73,7 +91,7 @@ export default async function Home() {
 
           {/* Additional Info */}
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg glass-panel">
               <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
                 ℹ️ How to Use
               </h2>
@@ -96,7 +114,7 @@ export default async function Home() {
                 </li>
               </ul>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg glass-panel">
               <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
                 ℹ️ How can I upload my reviewer?
               </h2>
@@ -117,8 +135,8 @@ export default async function Home() {
                   <span className="font-bold mr-2">4.</span>
                   <span>Thats it your done!</span>
                 </li>
-                <p className="text-gray-600 dark:text-gray-300">If you want to report a reviewer for any reason, please contact our admins.</p>
               </ul>
+              <p className="mt-4 text-gray-600 dark:text-gray-300">If you want to report a reviewer for any reason, please contact our admins.</p>
             </div>
           </div>
         </div>

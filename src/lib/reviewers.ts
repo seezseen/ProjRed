@@ -55,3 +55,57 @@ export async function createReviewer(reviewer: Omit<Reviewer, "_id">) {
     return { error: "Failed to create reviewer." };
   }
 }
+
+export async function searchReviewers(query: string) {
+  try {
+    if (!reviewers) await init();
+    const q = query.trim();
+    if (!q) return { reviewers: [] };
+    const regex = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+    const result = await reviewers
+      .find({
+        $or: [
+          { title: regex },
+          { description: regex },
+          { subject: regex },
+          { tags: { $elemMatch: { $regex: regex } } },
+        ],
+      })
+      .limit(50)
+      .toArray();
+    return { reviewers: result.map((r: Reviewer) => ({ ...r, _id: (r as any)._id.toString() })) };
+  } catch (error) {
+    return { error: "Failed to search reviewers." };
+  }
+}
+
+export async function incrementHelpful(reviewerId: string) {
+  try {
+    if (!reviewers) await init();
+    const { ObjectId } = await import("mongodb");
+    const _id = new ObjectId(reviewerId);
+    const res = await reviewers.findOneAndUpdate(
+      { _id },
+      { $inc: { helpfulCount: 1 } },
+      { returnDocument: "after", upsert: false }
+    );
+    if (!res.value) return { error: "Reviewer not found" };
+    const doc = res.value as Reviewer as any;
+    return { reviewer: { ...doc, _id: doc._id.toString() } };
+  } catch (error) {
+    return { error: "Failed to update helpful count." };
+  }
+}
+
+export async function getReviewersByIds(ids: string[]) {
+  try {
+    if (!reviewers) await init();
+    if (ids.length === 0) return { reviewers: [] };
+    const { ObjectId } = await import("mongodb");
+    const objIds = ids.filter(Boolean).map((id) => new ObjectId(id));
+    const result = await reviewers.find({ _id: { $in: objIds } }).toArray();
+    return { reviewers: result.map((r: any) => ({ ...r, _id: r._id.toString() })) };
+  } catch (error) {
+    return { error: "Failed to fetch favorites." };
+  }
+}

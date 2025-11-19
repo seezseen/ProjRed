@@ -9,7 +9,10 @@ import {
 } from "@/components/ui/card";
 import { Header } from "@/components/header";
 import { Badge } from "@/components/ui/badge";
-import { User, Mail, Shield } from "lucide-react";
+import { User, Mail, Shield, Heart } from "lucide-react";
+import clientPromise from "@/lib/client";
+import { getReviewersByIds } from "@/lib/reviewers";
+import { ReviewerCard } from "@/components/reviewer-card";
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
@@ -21,11 +24,23 @@ export default async function ProfilePage() {
     redirect("/login");
   }
 
+  // Fetch favorites for the logged-in user
+  let favoriteReviewers: any[] = [];
+  try {
+    const client = await clientPromise;
+    const db = client.db();
+    const users = db.collection("users");
+    const user = await users.findOne({ email: session.user?.email });
+    const favorites: string[] = user?.favorites || [];
+    const { reviewers } = await getReviewersByIds(favorites);
+    favoriteReviewers = reviewers || [];
+  } catch {}
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       <Header />
-      <div className="container flex items-center justify-center p-4 md:p-8">
-        <Card className="w-full max-w-md">
+      <div className="container p-4 md:p-8 space-y-8">
+        <Card className="w-full max-w-3xl mx-auto glass-panel">
           <CardHeader>
             <CardTitle>Profile</CardTitle>
             <CardDescription>Your personal information</CardDescription>
@@ -76,6 +91,22 @@ export default async function ProfilePage() {
             </div>
           </CardContent>
         </Card>
+
+        <div className="w-full max-w-5xl mx-auto">
+          <div className="flex items-center gap-2 mb-3">
+            <Heart className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-semibold">Favorites</h2>
+          </div>
+          {favoriteReviewers.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No favorites yet. Tap the heart on any reviewer to save it here.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {favoriteReviewers.map((r) => (
+                <ReviewerCard key={r._id} reviewer={r} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );

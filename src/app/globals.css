@@ -44,6 +44,20 @@
 }
 
 :root {
+  /* Glass variables */
+  --glass-blur-s: 12px;
+  --glass-blur-m: 14px;
+  --glass-blur-l: 18px;
+  --glass-sat: 140%;
+  --glass-sat-high: 160%;
+
+  /* Gradient variables (defaults: Aurora) */
+  --grad-1: rgba(168,85,247,0.2);
+  --grad-2: rgba(236,72,153,0.2);
+  --grad-3: rgba(59,130,246,0.2);
+  --ambient-1: rgba(168,85,247,0.15);
+  --ambient-2: rgba(59,130,246,0.12);
+  --ambient-3: rgba(236,72,153,0.10);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.13 0.028 261.692);
@@ -109,6 +123,13 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* Animated gradient keyframes */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes shimmer {
@@ -194,4 +215,171 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-fadeIn,
+  .animate-scaleIn,
+  .animate-slideInUp {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Allow explicit user override via data attribute */
+[data-reduced-motion="true"] * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+[data-reduced-motion="true"] .animate-fadeIn,
+[data-reduced-motion="true"] .animate-scaleIn,
+[data-reduced-motion="true"] .animate-slideInUp {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Glass and gradient utilities (opt-in via attributes) */
+[data-glass="true"] .glass-surface {
+  background: color-mix(in oklab, var(--background) 70%, transparent);
+  -webkit-backdrop-filter: blur(var(--glass-blur-m)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur-m)) saturate(var(--glass-sat));
+  border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+[data-glass="true"] .glass-panel {
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+  -webkit-backdrop-filter: blur(var(--glass-blur-l)) saturate(var(--glass-sat-high));
+  backdrop-filter: blur(var(--glass-blur-l)) saturate(var(--glass-sat-high));
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+[data-glass="true"] .glass-card {
+  background: color-mix(in oklab, var(--card) 65%, transparent);
+  -webkit-backdrop-filter: blur(var(--glass-blur-s)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur-s)) saturate(var(--glass-sat));
+  border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+}
+
+[data-gradients="true"] .gradient-sheen {
+  position: relative;
+}
+[data-gradients="true"] .gradient-sheen::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background: linear-gradient(120deg,
+    color-mix(in oklab, var(--grad-1) 90%, transparent),
+    color-mix(in oklab, var(--grad-2) 90%, transparent),
+    color-mix(in oklab, var(--grad-3) 90%, transparent));
+  border-radius: inherit;
+  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 1px;
+}
+
+/* Ambient background overlay */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+[data-gradients="true"] .ambient-bg {
+  opacity: 1;
+  background: radial-gradient(800px 500px at 10% 10%, var(--ambient-1), transparent 60%),
+              radial-gradient(800px 500px at 90% 20%, var(--ambient-2), transparent 60%),
+              radial-gradient(900px 600px at 50% 100%, var(--ambient-3), transparent 60%);
+  filter: blur(20px);
+}
+
+/* Animated gradient helper */
+[data-gradients="true"] .gradient-animated {
+  background: linear-gradient(120deg, var(--grad-1), var(--grad-2), var(--grad-3));
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Presets */
+[data-preset="aurora"] {
+  --grad-1: rgba(168,85,247,0.2);
+  --grad-2: rgba(236,72,153,0.2);
+  --grad-3: rgba(59,130,246,0.2);
+  --ambient-1: rgba(168,85,247,0.15);
+  --ambient-2: rgba(59,130,246,0.12);
+  --ambient-3: rgba(236,72,153,0.10);
+  /* UI tints */
+  --primary: #8b5cf6; /* violet-500 */
+  --secondary: #60a5fa; /* blue-400 */
+}
+[data-preset="sunset"] {
+  --grad-1: rgba(251,146,60,0.22); /* orange */
+  --grad-2: rgba(244,63,94,0.22);  /* rose */
+  --grad-3: rgba(217,70,239,0.22); /* fuchsia */
+  --ambient-1: rgba(251,146,60,0.16);
+  --ambient-2: rgba(244,63,94,0.14);
+  --ambient-3: rgba(217,70,239,0.12);
+  /* UI tints */
+  --primary: #f43f5e; /* rose-500 */
+  --secondary: #fb923c; /* orange-400 */
+}
+[data-preset="ocean"] {
+  --grad-1: rgba(56,189,248,0.22); /* sky */
+  --grad-2: rgba(16,185,129,0.22); /* emerald */
+  --grad-3: rgba(59,130,246,0.22); /* blue */
+  --ambient-1: rgba(56,189,248,0.16);
+  --ambient-2: rgba(16,185,129,0.14);
+  --ambient-3: rgba(59,130,246,0.12);
+  /* UI tints */
+  --primary: #0ea5e9; /* sky-500 */
+  --secondary: #10b981; /* emerald-500 */
+}
+
+[data-preset="pastel"] {
+  --grad-1: rgba(196,181,253,0.28); /* violet-300 */
+  --grad-2: rgba(253,164,175,0.28); /* rose-300 */
+  --grad-3: rgba(147,197,253,0.28); /* blue-300 */
+  --ambient-1: rgba(196,181,253,0.18);
+  --ambient-2: rgba(253,164,175,0.16);
+  --ambient-3: rgba(147,197,253,0.16);
+  /* UI tints */
+  --primary: #c4b5fd; /* violet-300 */
+  --secondary: #fda4af; /* rose-300 */
+}
+
+[data-preset="neon"] {
+  --grad-1: rgba(244,63,94,0.30);   /* rose-500 */
+  --grad-2: rgba(34,211,238,0.30);  /* cyan-400 */
+  --grad-3: rgba(217,70,239,0.30);  /* fuchsia-500 */
+  --ambient-1: rgba(244,63,94,0.20);
+  --ambient-2: rgba(34,211,238,0.18);
+  --ambient-3: rgba(217,70,239,0.18);
+  /* UI tints */
+  --primary: #e879f9; /* fuchsia-400 */
+  --secondary: #22d3ee; /* cyan-400 */
+}
+
+/* Low-power mode adjustments */
+[data-low-power="true"] {
+  --glass-blur-s: 6px;
+  --glass-blur-m: 8px;
+  --glass-blur-l: 10px;
+  --glass-sat: 120%;
+  --glass-sat-high: 130%;
+}
+[data-low-power="true"] .gradient-animated {
+  animation: none !important;
+  background-size: 100% 100% !important;
 }

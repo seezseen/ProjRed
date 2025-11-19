@@ -24,6 +24,8 @@ export async function POST(request: NextRequest) {
     const description = formData.get("description") as string
     const subject = formData.get("subject") as string
     const gradeLevel = formData.get("gradeLevel") as string
+    const tagsStr = (formData.get("tags") as string) || ""
+    const difficulty = (formData.get("difficulty") as string) || ""
 
     if (!file || !title || !description || !subject || !gradeLevel) {
       return NextResponse.json(
@@ -48,6 +50,12 @@ export async function POST(request: NextRequest) {
     const db = client.db()
     const reviewers = db.collection("reviewers")
 
+    const parsedTags = tagsStr
+      .split(",")
+      .map((t) => t.trim())
+      .filter((t) => t)
+      .slice(0, 12)
+
     const result = await reviewers.insertOne({
       title,
       description,
@@ -58,6 +66,8 @@ export async function POST(request: NextRequest) {
       fileSize: file.size,
       uploadedBy: session.user.email,
       createdAt: new Date(),
+      tags: parsedTags,
+      difficulty: ["easy","medium","hard"].includes(difficulty) ? difficulty : undefined,
     })
 
     return NextResponse.json({

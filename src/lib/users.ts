@@ -88,3 +88,18 @@ export async function createUser(user: Omit<User, "_id">) {
     return { error: "Failed to create user." }
   }
 }
+
+export async function toggleFavorite(userEmail: string, reviewerId: string) {
+  try {
+    if (!users) await init();
+    const res = await users.findOne({ email: userEmail });
+    if (!res) return { error: "User not found" };
+    const has = Array.isArray(res.favorites) && res.favorites.includes(reviewerId);
+    const update = has ? { $pull: { favorites: reviewerId } } : { $addToSet: { favorites: reviewerId } };
+    const upd = await users.findOneAndUpdate({ email: userEmail }, update, { returnDocument: "after" });
+    const doc = upd.value as User;
+    return { favorites: doc?.favorites || [], favored: !has };
+  } catch (error) {
+    return { error: "Failed to update favorites." };
+  }
+}
