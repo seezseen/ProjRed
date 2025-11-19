@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import { Upload, User, LogOut, FileText, Shield, Settings, Award } from "lucide-react";
+import { Upload, User, LogOut, FileText, Shield, Settings, Award, PhoneCall } from "lucide-react";
 
 export function Header() {
   const { data: session } = useSession();
@@ -55,6 +55,12 @@ export function Header() {
                 <Link href="/credits">
                   <Award className="mr-2 h-4 w-4" />
                   <span className="hidden sm:inline">Credits</span>
+                </Link>
+              </Button>
+              <Button asChild size="sm" variant="default" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link href="https://discord.gg/2rPCnZwcbM">
+                  <PhoneCall className="mr-2 h-4 w-4" />
+                  <span className="hidden sm:inline">Contact Us</span>
                 </Link>
               </Button>
               {isAdmin && (
