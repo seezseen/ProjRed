@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import { Upload, User, LogOut, FileText, Shield, Settings, Award, PhoneCall } from "lucide-react";
+import { Upload, User, LogOut, FileText, Shield, Settings, Award, PhoneCall, Megaphone } from "lucide-react";
 
 export function Header() {
   const { data: session } = useSession();
@@ -64,12 +64,20 @@ export function Header() {
                 </Link>
               </Button>
               {isAdmin && (
-                <Button asChild size="sm" variant="default" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                  <Link href="/upload">
-                    <Upload className="mr-2 h-4 w-4 transition-transform duration-300 hover:rotate-12" />
-                    <span className="hidden sm:inline">Upload</span>
-                  </Link>
-                </Button>
+                <>
+                  <Button asChild size="sm" variant="outline" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <Link href="/admin/broadcasts">
+                      <Megaphone className="mr-2 h-4 w-4" />
+                      <span className="hidden sm:inline">Broadcasts</span>
+                    </Link>
+                  </Button>
+                  <Button asChild size="sm" variant="default" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <Link href="/upload">
+                      <Upload className="mr-2 h-4 w-4 transition-transform duration-300 hover:rotate-12" />
+                      <span className="hidden sm:inline">Upload</span>
+                    </Link>
+                  </Button>
+                </>
               )}
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
