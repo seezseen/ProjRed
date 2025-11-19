@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getGridFSBucket } from "@/lib/r2"
-import { ObjectId } from "mongodb"
+import clientPromise from "@/lib/client"
+import { GridFSBucket, ObjectId } from "mongodb"
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function GET(
   request: NextRequest,
@@ -15,19 +16,21 @@ export async function GET(
       return NextResponse.json({ error: "Invalid file ID" }, { status: 400 })
     }
 
-    const bucket = await getGridFSBucket()
-    const downloadStream = bucket.openDownloadStream(new ObjectId(id))
+    const client = await clientPromise
+    const db = client.db()
+    const bucket = new GridFSBucket(db, { bucketName: "uploads" })
 
-    // Get file metadata
+    // Check if file exists
     const files = await bucket.find({ _id: new ObjectId(id) }).toArray()
     if (files.length === 0) {
       return NextResponse.json({ error: "File not found" }, { status: 404 })
     }
 
     const file = files[0]
+    const downloadStream = bucket.openDownloadStream(new ObjectId(id))
     const chunks: Buffer[] = []
 
-    return new Promise<NextResponse>((resolve, reject) => {
+    return new Promise<NextResponse>((resolve) => {
       downloadStream.on("data", (chunk) => chunks.push(chunk))
       
       downloadStream.on("end", () => {
@@ -35,9 +38,10 @@ export async function GET(
         const response = new NextResponse(buffer, {
           status: 200,
           headers: {
-            "Content-Type": file.contentType || "application/pdf",
+            "Content-Type": file.metadata?.contentType || "application/pdf",
             "Content-Disposition": `inline; filename="${file.filename}"`,
             "Content-Length": buffer.length.toString(),
+            "Cache-Control": "public, max-age=31536000, immutable",
           },
         })
         resolve(response)
