@@ -24,7 +24,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-8">
           <Link href="/" className="text-2xl font-bold hover:opacity-80 transition-all duration-300 hover:scale-105">
-            Project Red
+            Reviewer's Menu
           </Link>
           <nav className="hidden md:flex items-center gap-4">
             <Link href="/grade/7" className="text-sm hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">

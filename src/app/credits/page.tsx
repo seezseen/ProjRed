@@ -12,7 +12,7 @@ export default function CreditsPage() {
     {
       name: "Project Team",
       role: "Development & Design",
-      description: "Built with passion for students by students",
+      description: "Buuld by students for students.",
       icon: Users,
     },
     {
@@ -50,9 +50,6 @@ export default function CreditsPage() {
             <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-slideInUp">
               Credits & Acknowledgments
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
-              Thank you to everyone who made this project possible
-            </p>
           </div>
 
           {/* Project Info */}
@@ -65,9 +62,9 @@ export default function CreditsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-gray-600 dark:text-gray-400">
-                Project Red is a community-driven platform designed to help students access quality study materials. 
-                This project was inspired by <span className="font-semibold text-primary">Reviewers Kitchen</span>, 
-                with the goal of making educational resources freely available to all students.
+                Reviewer's Menu is a project made by students for students to 
+                access student made reviewers! This way, all reviewers can be 
+                accessed in one website!
               </p>
               <div className="flex flex-wrap gap-2 pt-4">
                 <Badge variant="secondary" className="px-3 py-1">
@@ -178,7 +175,7 @@ export default function CreditsPage() {
                 </Link>
               </Button>
               <Button asChild>
-                <Link href="/contact">
+                <Link href="https://discord.gg/2rPCnZwcbM">
                   <Users className="mr-2 h-4 w-4" />
                   Contact Us
                 </Link>
