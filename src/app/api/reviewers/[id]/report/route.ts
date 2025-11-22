@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { reason, details } = await request.json();
     if (!reason) return NextResponse.json({ message: "Missing reason" }, { status: 400 });
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     const db = client.db();
     const reports = db.collection("reports");
     const doc = {
-      reviewerId: new ObjectId(params.id),
+      reviewerId: new ObjectId((await params).id),
       reason,
       details: details || "",
       createdAt: new Date(),
