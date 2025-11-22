@@ -34,6 +34,8 @@ const formSchema = z.object({
   gradeLevel: z.string().min(1, "Please select at least one grade level"),
   tags: z.string().optional(),
   difficulty: z.enum(["easy", "medium", "hard"]).optional(),
+  author: z.string().optional(),
+  component: z.enum(["Quiz","Midterms","Finals","Others"]).optional(),
   file: z
     .instanceof(File)
     .refine((file) => file.size <= MAX_FILE_SIZE, "Max file size is 10MB")
@@ -92,6 +94,8 @@ export default function UploadPage() {
       formData.append("gradeLevel", values.gradeLevel);
       if (values.tags) formData.append("tags", values.tags);
       if (values.difficulty) formData.append("difficulty", values.difficulty);
+      if (values.author) formData.append("author", values.author);
+      if (values.component) formData.append("component", values.component);
 
       // Upload file and metadata to MongoDB
       const uploadResponse = await fetch("/api/reviewers/upload", {
@@ -179,6 +183,24 @@ export default function UploadPage() {
                     {form.formState.errors.subject.message}
                   </p>
                 )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="author">Author</Label>
+                <Input id="author" type="text" placeholder="e.g., Author name" {...form.register("author")} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="component">Component</Label>
+                <select
+                  id="component"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  {...form.register("component")}
+                >
+                  <option value="">Select component</option>
+                  <option value="Quiz">Quiz</option>
+                  <option value="Midterms">Midterms</option>
+                  <option value="Finals">Finals</option>
+                  <option value="Others">Others</option>
+                </select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="tags">Tags (comma separated)</Label>

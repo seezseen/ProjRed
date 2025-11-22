@@ -119,6 +119,12 @@ export function Header() {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
+                      <Link href="/admin/reviewer-approvals" className="transition-all duration-200 hover:translate-x-1">
+                        <FileText className="mr-2 h-4 w-4" />
+                        Reviewer Approval
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Link href="/admin/pointers" className="transition-all duration-200 hover:translate-x-1">
                         <FileText className="mr-2 h-4 w-4" />
                         Pointers Management

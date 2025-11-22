@@ -81,6 +81,11 @@ export default function GradePage({ params }: GradePageProps) {
           <p className="text-gray-600 dark:text-gray-400 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
             Browse and download review materials for Grade {grade} subjects
           </p>
+          <div className="mt-4 animate-fadeIn" style={{ animationDelay: '0.25s' }}>
+            <Link href={`/upload-request?grade=${grade}`} className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-4 py-2 hover:bg-primary/90 transition-colors">
+              Submit a Reviewer for Approval
+            </Link>
+          </div>
         </div>
 
         {/* Search and Filter */}

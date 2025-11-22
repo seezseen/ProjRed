@@ -26,6 +26,8 @@ export async function POST(request: NextRequest) {
     const gradeLevel = formData.get("gradeLevel") as string
     const tagsStr = (formData.get("tags") as string) || ""
     const difficulty = (formData.get("difficulty") as string) || ""
+    const author = (formData.get("author") as string) || ""
+    const component = (formData.get("component") as string) || ""
 
     if (!file || !title || !description || !subject || !gradeLevel) {
       return NextResponse.json(
@@ -68,6 +70,8 @@ export async function POST(request: NextRequest) {
       createdAt: new Date(),
       tags: parsedTags,
       difficulty: ["easy","medium","hard"].includes(difficulty) ? difficulty : undefined,
+      author: author || undefined,
+      component: ["Quiz","Midterms","Finals","Others"].includes(component) ? component : undefined,
     })
 
     return NextResponse.json({

@@ -82,10 +82,10 @@ export default async function Home() {
               📚 About the Library
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              Welcome to the Reviewer Library! This website is a collection of reviewers made by students so that all students can use YOUR reviewer!
+              Welcome to the Reviewers Menu! This webpage holds a menu full of reviewers made by students!
             </p>
             <p className="text-gray-600 dark:text-gray-300">
-              Reviewers that are uploaded here are accessble to all students! And of course we will credit the author of the reviewer as well as the person who submitted it.
+              Reviewers uploaded here will be credited properly!
             </p>
           </div>
 
@@ -93,7 +93,7 @@ export default async function Home() {
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg glass-panel">
               <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-                ℹ️ How to Use
+                How can I view my grade levels reviewer?
               </h2>
               <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
@@ -116,7 +116,7 @@ export default async function Home() {
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg glass-panel">
               <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-                ℹ️ How can I upload my reviewer?
+                I want to upload my reviewer! But how can I upload it?
               </h2>
               <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
